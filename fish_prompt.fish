@@ -5,14 +5,19 @@ function fish_prompt
 
   # Set color for variables in prompt
   set -l normal (set_color normal)
-  set -l white (set_color FFFFFF)
-  set -l turquoise (set_color 5fdfff)
-  set -l orange (set_color df5f00)
-  set -l hotpink (set_color df005f)
+  set -l brblue (set_color brblue)
+  set -l bryellow (set_color bryellow)
+  set -l brgreen (set_color brgreen)
+  set -l brred (set_color brred)
+  set -l brblack (set_color brblack)
+  set -l brcyan (set_color brcyan)
+  set -l cyan (set_color cyan)
+  set -l magenta (set_color magenta)
   set -l blue (set_color blue)
-  set -l limegreen (set_color 87ff00)
-  set -l purple (set_color af5fff)
-  set -l red (set_color e70e0e)
+  set -l yellow (set_color yellow)
+  set -l green (set_color green)
+  set -l black (set_color black)
+  set -l red (set_color red)
 
   # Configure __fish_git_prompt
   set -g __fish_git_prompt_char_stateseparator ' '
@@ -23,25 +28,25 @@ function fish_prompt
   set -g __fish_git_prompt_showdirtystate true
   set -g __fish_git_prompt_showuntrackedfiles true
   set -g __fish_git_prompt_showstashstate true
-  set -g __fish_git_prompt_show_informative_status true 
+  set -g __fish_git_prompt_show_informative_status true
 
   # Only calculate once, to save a few CPU cycles when displaying the prompt
   if not set -q __fish_prompt_hostname
     # set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
-    set -g __fish_prompt_hostname $orange(hostname|cut -d . -f 1)(set_color normal)
+    set -g __fish_prompt_hostname $yellow(hostname|cut -d . -f 1)(set_color normal)
   end
   if not set -q __fish_prompt_char
     if [ (id -u) -eq 0 ]
       set -g __fish_prompt_char (set_color red)'λ'(set_color normal)
-    else  
+    else
       set -g __fish_prompt_char 'λ'
     end
   end
-  
+
   # change `at` to `ssh` when an interactive ssh session is present
   if [ "$SSH_TTY" = "" ]
     set -g location at
-    # set -g __fish_prompt_hostname (set_color orange)(hostname|cut -d . -f 1)
+    # set -g __fish_prompt_hostname ($yellow)(hostname|cut -d . -f 1)
   else # connected via ssh
     if [ "$TERM" = "xterm-256color-italic" -o "$TERM" = "tmux-256color" ]
       set -g location (echo -e "\e[3mssh\e[23m")
@@ -56,26 +61,26 @@ function fish_prompt
 
   if [ (id -u) -eq 0 ]
     # top line > Superuser
-    echo -n $red'╭─'$hotpink$USER $white$location $__fish_prompt_hostname$white' in '$limegreen(pwd)$turquoise
+    echo -n $red'╭─'$magenta$USER $normal$location $__fish_prompt_hostname$normal' in '$brgreen(pwd)$brcyan
     __fish_git_prompt " (%s)"
     echo
     # bottom line > Superuser
     echo -n $red'╰'
     echo -n $red'─'$__fish_prompt_char $normal
   else # top line > non superuser's
-    echo -n $white'╭─'$hotpink$USER $white$location $__fish_prompt_hostname$white' in '$limegreen(pwd)$turquoise
+    echo -n $normal'╭─'$magenta$USER $normal$location $__fish_prompt_hostname$normal' in '$brgreen(pwd)$brcyan
     __fish_git_prompt " (%s)"
     echo
     # bottom line > non superuser's
-    echo -n $white'╰'
-    echo -n $white'─'$__fish_prompt_char $normal
+    echo -n $normal'╰'
+    echo -n $normal'─'$__fish_prompt_char $normal
   end
-  
+
   # NOTE: disable `VIRTUAL_ENV_DISABLE_PROMPT` in `config.fish`
   # see:  https://virtualenv.pypa.io/en/latest/reference/#envvar-VIRTUAL_ENV_DISABLE_PROMPT
   # support for virtual env name
   if set -q VIRTUAL_ENV
-      echo -n "($turquoise"(basename "$VIRTUAL_ENV")"$white)"
+      echo -n "($brcyan"(basename "$VIRTUAL_ENV")"$white)"
   end
 end
 
