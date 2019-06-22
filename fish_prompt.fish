@@ -21,10 +21,10 @@ function fish_prompt
 
   # Configure __fish_git_prompt
   set -g __fish_git_prompt_char_stateseparator ' '
-  set -g __fish_git_prompt_color 5fdfff
-  set -g __fish_git_prompt_color_flags df5f00
-  set -g __fish_git_prompt_color_prefix white
-  set -g __fish_git_prompt_color_suffix white
+  set -g __fish_git_prompt_color cyan
+  set -g __fish_git_prompt_color_flags red
+  set -g __fish_git_prompt_color_prefix normal
+  set -g __fish_git_prompt_color_suffix normal
   set -g __fish_git_prompt_showdirtystate true
   set -g __fish_git_prompt_showuntrackedfiles true
   set -g __fish_git_prompt_showstashstate true
@@ -61,14 +61,14 @@ function fish_prompt
 
   if [ (id -u) -eq 0 ]
     # top line > Superuser
-    echo -n $red'╭─'$magenta$USER $normal$location $__fish_prompt_hostname$normal' in '$brgreen(pwd)$brcyan
+    echo -n $red'╭─'$magenta$USER $normal$location $__fish_prompt_hostname$normal' in '$green(pwd)$brcyan
     __fish_git_prompt " (%s)"
     echo
     # bottom line > Superuser
     echo -n $red'╰'
     echo -n $red'─'$__fish_prompt_char $normal
   else # top line > non superuser's
-    echo -n $normal'╭─'$magenta$USER $normal$location $__fish_prompt_hostname$normal' in '$brgreen(pwd)$brcyan
+    echo -n $normal'╭─'$magenta$USER $normal$location $__fish_prompt_hostname$normal' in '$green(pwd)$brcyan
     __fish_git_prompt " (%s)"
     echo
     # bottom line > non superuser's
