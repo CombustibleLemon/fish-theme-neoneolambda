@@ -72,7 +72,7 @@ function fish_prompt
     echo -n $red'╰'
     echo -n $red'─'$__fish_prompt_char $text
   else # top line > non superuser's
-    echo -n $text'╭─'$magenta$USER $text$location $__fish_prompt_hostname$text' in '$gbrreen(pwd)$brcyan
+    echo -n $text'╭─'$magenta$USER $text$location $__fish_prompt_hostname$text' in '$brgreen(pwd)$brcyan
     __fish_git_prompt " (%s)"
     echo
     # bottom line > non superuser's
