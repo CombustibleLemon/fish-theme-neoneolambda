@@ -37,7 +37,7 @@ function fish_prompt
   # Only calculate once, to save a few CPU cycles when displaying the prompt
   if not set -q __fish_prompt_hostname
     # set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
-    set -g __fish_prompt_hostname $yellow(hostname|cut -d . -f 1)(set_color brwhite)
+    set -g __fish_prompt_hostname $yellow(hostname -f)(set_color brwhite)
   end
   if not set -q __fish_prompt_char
     if [ (id -u) -eq 0 ]
@@ -65,14 +65,14 @@ function fish_prompt
 
   if [ (id -u) -eq 0 ]
     # top line > Superuser
-    echo -n $red'╭─'$magenta$USER $text$location $__fish_prompt_hostname$text' in '$green(pwd)$brcyan
+    echo -n $red'╭─'$magenta$USER $text$location $__fish_prompt_hostname$text' in '$brgreen(pwd)$brcyan
     __fish_git_prompt " (%s)"
     echo
     # bottom line > Superuser
     echo -n $red'╰'
     echo -n $red'─'$__fish_prompt_char $text
   else # top line > non superuser's
-    echo -n $text'╭─'$magenta$USER $text$location $__fish_prompt_hostname$text' in '$green(pwd)$brcyan
+    echo -n $text'╭─'$magenta$USER $text$location $__fish_prompt_hostname$text' in '$gbrreen(pwd)$brcyan
     __fish_git_prompt " (%s)"
     echo
     # bottom line > non superuser's
