@@ -5,6 +5,7 @@ function fish_prompt
 
   # Set color for variables in prompt
   set -l normal (set_color normal)
+  set -l text (set_color white)
   set -l brblue (set_color brblue)
   set -l bryellow (set_color bryellow)
   set -l brgreen (set_color brgreen)
@@ -36,11 +37,11 @@ function fish_prompt
   # Only calculate once, to save a few CPU cycles when displaying the prompt
   if not set -q __fish_prompt_hostname
     # set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
-    set -g __fish_prompt_hostname $yellow(hostname|cut -d . -f 1)(set_color normal)
+    set -g __fish_prompt_hostname $yellow(hostname|cut -d . -f 1)(set_color text)
   end
   if not set -q __fish_prompt_char
     if [ (id -u) -eq 0 ]
-      set -g __fish_prompt_char (set_color red)'λ'(set_color normal)
+      set -g __fish_prompt_char (set_color red)'λ'(set_color text)
     else
       set -g __fish_prompt_char 'λ'
     end
@@ -54,29 +55,29 @@ function fish_prompt
     if [ "$TERM" = "xterm-256color-italic" -o "$TERM" = "tmux-256color" ]
       set -g location (echo -e "\e[3mssh\e[23m")
       # set -g ssh_hostname (echo -e $blue$__fish_prompt_hostname)
-      set -g __fish_prompt_hostname $blue(hostname|cut -d . -f 1)(set_color normal)
+      set -g __fish_prompt_hostname $blue(hostname|cut -d . -f 1)(set_color text)
     else
       set -g location ssh
       # set -g ssh_hostname (echo -e $blue$__fish_prompt_hostname)
-      set -g __fish_prompt_hostname $blue(hostname|cut -d . -f 1)(set_color normal)
+      set -g __fish_prompt_hostname $blue(hostname|cut -d . -f 1)(set_color text)
     end
   end
 
   if [ (id -u) -eq 0 ]
     # top line > Superuser
-    echo -n $red'╭─'$magenta$USER $normal$location $__fish_prompt_hostname$normal' in '$green(pwd)$brcyan
+    echo -n $red'╭─'$magenta$USER $text$location $__fish_prompt_hostname$text' in '$green(pwd)$brcyan
     __fish_git_prompt " (%s)"
     echo
     # bottom line > Superuser
     echo -n $red'╰'
-    echo -n $red'─'$__fish_prompt_char $normal
+    echo -n $red'─'$__fish_prompt_char $text
   else # top line > non superuser's
-    echo -n $normal'╭─'$magenta$USER $normal$location $__fish_prompt_hostname$normal' in '$green(pwd)$brcyan
+    echo -n $text'╭─'$magenta$USER $text$location $__fish_prompt_hostname$text' in '$green(pwd)$brcyan
     __fish_git_prompt " (%s)"
     echo
     # bottom line > non superuser's
-    echo -n $normal'╰'
-    echo -n $normal'─'$__fish_prompt_char $normal
+    echo -n $text'╰'
+    echo -n $text'─'$__fish_prompt_char $normal
   end
 
   # NOTE: disable `VIRTUAL_ENV_DISABLE_PROMPT` in `config.fish`
